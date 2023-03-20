@@ -24,30 +24,32 @@
             <div th:class="${alerta}" role="alert" th:text="${mensagem}">
             </div>
           </c:if>
-            <table class="table table-striped align-middle">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Imagem</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Endereco</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="u : ${usuarios}">
-                    <th scope="row" th:text="${u.id}"></th>
-                    <th><img th:src="@{${u.imagem.url}}" th:alt="${u.nome}" width="50"></th>
-                    <td th:text="${u.nome}"></td>
-                    <td th:text="${u.email}"></td>
-                    <td th:text="${u.telefone}"></td>
-                    <td th:text="${u.endereco}"></td>
-                    <td><a th:href="@{'/deletar/' + ${u.id}}"  class="btn btn-danger">Excluir</a></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="table-responsive">
+              <table class="table table-striped align-middle">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Imagem</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Telefone</th>
+                      <th scope="col">Endereco</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="u : ${usuarios}">
+                      <th scope="row" th:text="${u.id}"></th>
+                      <th><img th:src="@{${u.imagem.url}}" th:alt="${u.nome}" width="50"></th>
+                      <td th:text="${u.nome}"></td>
+                      <td th:text="${u.email}"></td>
+                      <td th:text="${u.telefone}"></td>
+                      <td th:text="${u.endereco}"></td>
+                      <td><a th:href="@{'/deletar/' + ${u.id}}"  class="btn btn-danger">Excluir</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
         </section>
     </div>
 </body>
