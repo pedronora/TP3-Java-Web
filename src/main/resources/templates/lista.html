@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <title>Lista de Usuários</title>
+</head>
+
+<body>
+    <div class="container my-4 p-3 rounded shadow">
+        <h1 class="mb-3">Lista de Usuários</h1>
+        <section class="mb-3">
+          <div class="mb-3">
+            <a class="btn btn-primary" href="/">Novo Usuário</a>
+          </div>
+          <div th:if="${mensagem != null}">
+            <div th:class="${alerta}" role="alert" th:text="${mensagem}">
+            </div>
+          </c:if>
+            <table class="table table-striped align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Imagem</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Endereco</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="u : ${usuarios}">
+                    <th scope="row" th:text="${u.id}"></th>
+                    <th><img th:src="@{${u.imagem.url}}" th:alt="${u.nome}" width="50"></th>
+                    <td th:text="${u.nome}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td th:text="${u.telefone}"></td>
+                    <td th:text="${u.endereco}"></td>
+                    <td><a th:href="@{'/deletar/' + ${u.id}}"  class="btn btn-danger">Excluir</a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+    </div>
+</body>
+
+</html>
