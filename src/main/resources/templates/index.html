@@ -22,8 +22,13 @@
                     <div class="col mb-3"></div>
                     <div class="col mb-3">
                         <label for="cep" class="form-label">CEP:</label>
-                        <input type="text" class="form-control" id="cep" aria-describedby="cepHelp" name="cep" placeholder="00000000" required>
-                        <div id="cepHelp" class="form-text">Informe somente números.</div>
+                        <input type="text" class="form-control" id="cep" aria-describedby="cepHelp" name="cep"
+                            placeholder="00000000" required>
+                        <div id="cepHelp" class="form-text mb-3">Informe somente números.</div>
+                        <div th:if="${mensagem != null}">
+                            <div th:class="${alerta}" role="alert" th:text="${mensagem}">
+                            </div>
+                        </div>
                     </div>
                     <div class="col mb-3"></div>
                 </div>

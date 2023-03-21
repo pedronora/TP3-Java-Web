@@ -36,27 +36,38 @@ public class UsuarioController {
     private StorageService storageService;
 
     @GetMapping(value = "/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("mensagem", msg);
+        model.addAttribute("alerta", alert);
+        msg = null;
         return "index";
     }
 
     @PostMapping(value = "/buscar")
     public String buscar(Model model, @RequestParam String cep) {
 
-            try {
-                URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
-                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                conexao.setRequestMethod("GET");
-                BufferedReader resposta = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
-                String json = resposta.lines().collect(Collectors.joining());
-                Gson gson = new Gson();
-                Endereco endereco = gson.fromJson(json, Endereco.class);
+        try {
+            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+            conexao.setRequestMethod("GET");
+            BufferedReader resposta = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            String json = resposta.lines().collect(Collectors.joining());
+            Gson gson = new Gson();
+            Endereco endereco = gson.fromJson(json, Endereco.class);
 
-                model.addAttribute("endereco", endereco);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                return "index";
+            if (endereco.getLogradouro() == null) {
+                msg = "O cep '" + cep + "' informado não foi encontrado!";
+                alert = "alert alert-danger";
+                return "redirect:/";
             }
+
+            model.addAttribute("endereco", endereco);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            msg = "O cep '" + cep + "' informado não foi encontrado!";
+            alert = "alert alert-danger";
+            return "redirect:/";
+        }
 
         return "cadastro";
     }
@@ -71,8 +82,8 @@ public class UsuarioController {
         usuario.setEndereco(endereco);
 
         String imgUrl = storageService.uploadImage(image);
-        String[] fields= imgUrl.split("/");
-        String imgName = fields[fields.length-1];
+        String[] fields = imgUrl.split("/");
+        String imgName = fields[fields.length - 1];
         Imagem newImage = new Imagem(imgName, imgUrl);
 
         usuario.setImagem(newImage);
@@ -89,6 +100,8 @@ public class UsuarioController {
         model.addAttribute("mensagem", msg);
         model.addAttribute("alerta", alert);
         model.addAttribute("usuarios", usuarioService.findAll());
+
+        msg = null;
         return "lista";
     }
 
@@ -102,4 +115,4 @@ public class UsuarioController {
         alert = "alert alert-danger";
         return "redirect:/lista";
     }
- }
+}
