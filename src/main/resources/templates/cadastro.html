@@ -20,20 +20,20 @@
             <form action="/cadastro" method="post" th:object="${endereco}" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Imagem de Perfil:</label>
-                    <input class="form-control" type="file" id="formFile" name="image" accept="image/png, image/jpeg">
+                    <input class="form-control" type="file" id="formFile" name="image" accept="image/png, image/jpeg" required>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome">
+                        <input type="text" class="form-control" id="nome" name="nome" required>
                     </div>
                     <div class="col">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="col">
                         <label for="telefone" class="form-label">Telefone:</label>
-                        <input type="number" class="form-control" id="email" name="telefone">
+                        <input type="number" class="form-control" id="email" name="telefone" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -44,13 +44,13 @@
                     </div>
                     <div class="col-3">
                         <label for="num" class="form-label">Número:</label>
-                        <input type="number" class="form-control" id="num" name="num">
+                        <input type="number" class="form-control" id="num" name="num" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label for="complemento" class="form-label">Complemento:</label>
-                        <input type="text" class="form-control" id="complemento" name="complemento">
+                        <input type="text" class="form-control" id="complemento" name="complemento" required>
                     </div>
                     <div class="col-3">
                         <label for="bairro" class="form-label">Bairro:</label>
